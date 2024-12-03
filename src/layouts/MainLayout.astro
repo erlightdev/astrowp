@@ -1,0 +1,68 @@
+---
+import { Header } from '../components/Header';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+	title = 'Astro WordPress Headless CMS', 
+	description = 'A modern headless WordPress site built with Astro' 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="dark:bg-gray-950 dark:text-white">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title>{title}</title>
+	</head>
+	<body class="min-h-screen flex flex-col dark:bg-gray-950 dark:text-white">
+		<Header client:load />
+		
+		<main class="flex-grow container mx-auto px-4 pt-20 max-w-7xl">
+			<div class="text-center mb-12">
+				<img 
+					src="/astro.svg" 
+					alt="Astro Logo" 
+					class="mx-auto h-24 w-24 mb-4" 
+				/>
+				<h1 class="text-4xl font-bold mb-4">Astro + WordPress</h1>
+				<p class="text-xl text-gray-600 dark:text-gray-300">
+					Headless CMS Powered by GraphQL
+				</p>
+			</div>
+			
+			<slot />
+		</main>
+		
+		<footer class="bg-gray-100 dark:bg-gray-900 py-8 mt-12">
+			<div class="container mx-auto px-4 text-center">
+				<div class="flex justify-center space-x-4 mb-4">
+					<a href="https://astro.build" target="_blank" class="hover:text-blue-500 transition">
+						Astro
+					</a>
+					<a href="https://wordpress.org" target="_blank" class="hover:text-blue-500 transition">
+						WordPress
+					</a>
+					<a href="https://graphql.org" target="_blank" class="hover:text-blue-500 transition">
+						GraphQL
+					</a>
+				</div>
+				<p class="text-sm text-gray-600 dark:text-gray-400">
+					{new Date().getFullYear()} Astro WordPress Headless CMS. All rights reserved.
+				</p>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	body {
+		@apply bg-white text-black;
+	}
+</style>

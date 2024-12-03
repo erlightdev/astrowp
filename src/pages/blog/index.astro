@@ -1,0 +1,21 @@
+---
+import '@/styles/globals.css'
+import Layout from '../../layouts/Layout.astro';
+import { Header } from '@/components/Header';
+import { getPosts } from '@/lib/wordpress';
+import { PostCard } from '@/components/PostCard';
+
+const posts = await getPosts();
+---
+
+<Layout title="Blog - WordPress Headless Theme">
+  <Header client:load />
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold mb-8">Blog</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {posts.map((post) => (
+        <PostCard client:load post={post} />
+      ))}
+    </div>
+  </main>
+</Layout>
